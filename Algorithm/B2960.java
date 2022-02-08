@@ -49,10 +49,10 @@ public class B2960 {
 }
 
 // [에라토스테네스의 체]
-// int prime[100];
-// int pn=0;
-// bool check[101];
-// int n = 100;
+// int prime[100];  // 소수 저장
+// int pn=0;    // 소수의 개수
+// bool check[101]; // 지워졌으면 true
+// int n = 100; // 100까지 소수
 // for (int i=2;i<=n;i++){
 //     if(check[i] == false){
 //         prime[pn++] = i;
