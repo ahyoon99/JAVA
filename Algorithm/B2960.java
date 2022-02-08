@@ -47,3 +47,17 @@ public class B2960 {
     }
     
 }
+
+// [에라토스테네스의 체]
+// int prime[100];
+// int pn=0;
+// bool check[101];
+// int n = 100;
+// for (int i=2;i<=n;i++){
+//     if(check[i] == false){
+//         prime[pn++] = i;
+//         for(int j=i*i; j<=n; j+=i){
+//             check[j] = true;
+//         }
+//     }
+// }
