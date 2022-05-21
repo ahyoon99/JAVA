@@ -32,7 +32,7 @@ public class B4963 {
                 int ny = y+dy[i];
                 if(0<=nx && nx<map.length && 0<=ny && ny<map[0].length && map[nx][ny]==1 && island[nx][ny]==0){
                     q.add(new Pair(nx, ny));
-                    island[nx][ny]=island[x][y]+1;
+                    island[nx][ny]=cnt;
                 }
             }
         }
