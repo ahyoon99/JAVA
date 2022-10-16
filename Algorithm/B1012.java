@@ -54,6 +54,66 @@ public class B1012 {
     // }
 
     // 방법 2 : BFS(Queue)
+    // static class Pair{
+    //     int x;
+    //     int y;
+
+    //     Pair(){}
+    //     Pair(int x, int y){
+    //         this.x=x;
+    //         this.y=y;
+    //     }
+    // }
+    // public static void main(String args[]){
+    //     Scanner sc = new Scanner(System.in);
+    //     int t=sc.nextInt();
+    //     for(int tc=0;tc<t;tc++){
+    //         int m=sc.nextInt();
+    //         int n=sc.nextInt();
+    //         int k=sc.nextInt();
+    //         boolean[][] map = new boolean[n][m];
+    //         boolean[][] visited = new boolean[n][m];
+    //         Queue<Pair> q = new LinkedList<>();
+
+    //         for(int i=0;i<k;i++){
+    //             int y = sc.nextInt();
+    //             int x = sc.nextInt();
+    //             map[x][y]=true;
+    //         }
+
+    //         int cnt=0;
+    //         for(int i=0;i<n;i++){
+    //             for(int j=0;j<m;j++){
+    //                 if(map[i][j]==false){
+    //                     continue;
+    //                 }
+    //                 else if(visited[i][j]==false){
+    //                     cnt++;
+    //                     q.add(new Pair(i,j));
+    //                     visited[i][j]=true;
+    //                     while(!q.isEmpty()){
+    //                         Pair p = q.poll();
+    //                         int xx = p.x;
+    //                         int yy = p.y;
+    //                         for(int l=0;l<4;l++){
+    //                             int nx = xx+dx[l];
+    //                             int ny = yy+dy[l];
+    //                             if(0<=nx && nx<n && 0<=ny && ny<m){
+    //                                 if(map[nx][ny]==true && visited[nx][ny]==false){
+    //                                     visited[nx][ny]=true;
+    //                                     q.add(new Pair(nx, ny));
+    //                                 }
+    //                             }
+    //                         }
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //         System.out.println(cnt);
+    //     }
+    // }
+
+    // 방법 3 : DFS(Stack)
     static class Pair{
         int x;
         int y;
@@ -73,7 +133,7 @@ public class B1012 {
             int k=sc.nextInt();
             boolean[][] map = new boolean[n][m];
             boolean[][] visited = new boolean[n][m];
-            Queue<Pair> q = new LinkedList<>();
+            Stack<Pair> s = new Stack<>();
 
             for(int i=0;i<k;i++){
                 int y = sc.nextInt();
@@ -84,15 +144,15 @@ public class B1012 {
             int cnt=0;
             for(int i=0;i<n;i++){
                 for(int j=0;j<m;j++){
-                    if(map[i][j]==false){
+                    if(map[i][j]==false || visited[i][j]==true){
                         continue;
                     }
-                    else if(visited[i][j]==false){
+                    else{
                         cnt++;
-                        q.add(new Pair(i,j));
+                        s.add(new Pair(i,j));
                         visited[i][j]=true;
-                        while(!q.isEmpty()){
-                            Pair p = q.poll();
+                        while(!s.isEmpty()){
+                            Pair p = s.pop();
                             int xx = p.x;
                             int yy = p.y;
                             for(int l=0;l<4;l++){
@@ -101,7 +161,7 @@ public class B1012 {
                                 if(0<=nx && nx<n && 0<=ny && ny<m){
                                     if(map[nx][ny]==true && visited[nx][ny]==false){
                                         visited[nx][ny]=true;
-                                        q.add(new Pair(nx, ny));
+                                        s.add(new Pair(nx,ny));
                                     }
                                 }
                             }
@@ -110,6 +170,6 @@ public class B1012 {
                 }
             }
             System.out.println(cnt);
-        }
+       }
     }
 }
