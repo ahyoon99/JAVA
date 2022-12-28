@@ -38,8 +38,50 @@ public class B2309 {
     // }
 
     // 방법 2 : 조합 (백트래킹)
+    // static boolean isFinish = false;
+    // static void combination(int[] height, boolean[] check, int start, int r, int total){
+    //     if(isFinish){
+    //         return;
+    //     }
+    //     if(r==0){
+    //         if(total==100){
+    //             for(int i=0;i<9;i++){
+    //                 if(check[i]==false){
+    //                     System.out.println(height[i]);
+    //                 }
+    //             }
+    //             isFinish = true;
+    //         }
+    //         return ;
+    //     }
+    //     for(int i=start;i<9;i++){
+    //         check[i]=true;
+    //         combination(height, check, i+1, r-1, total-height[i]);
+    //         check[i]=false;
+    //     }
+    //     return ;
+    // }
+
+    // static public void main(String args[]){
+    //     Scanner sc = new Scanner(System.in);
+    //     int[] height = new int[9];
+    //     boolean[] check = new boolean[9];
+
+    //     int total = 0;
+    //     for(int i=0;i<9;i++){
+    //         height [i]=sc.nextInt();
+    //         total+=height[i];
+    //     }
+
+    //     Arrays.sort(height);
+    //     Arrays.fill(check, false);
+
+    //     combination(height, check, 0, 2, total);
+    // }
+
+    // 방법 3 : 조합 (재귀함수)
     static boolean isFinish = false;
-    static void combination(int[] height, boolean[] check, int start, int r, int total){
+    static public void combination(int[] height, boolean[] check, int idx, int r, int total){
         if(isFinish){
             return;
         }
@@ -54,14 +96,16 @@ public class B2309 {
             }
             return ;
         }
-        for(int i=start;i<9;i++){
-            check[i]=true;
-            combination(height, check, i+1, r-1, total-height[i]);
-            check[i]=false;
+        if(idx>=9){
+            return;
         }
-        return ;
+        if(check[idx]==false){
+            check[idx]=true;
+            combination(height, check, idx+1, r-1, total-height[idx]);
+            check[idx]=false;
+            combination(height, check, idx+1, r, total);
+        }
     }
-
     static public void main(String args[]){
         Scanner sc = new Scanner(System.in);
         int[] height = new int[9];
