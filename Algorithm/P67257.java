@@ -137,6 +137,6 @@ public class P67257 {
        return maxValue;
     }
     static public void main(String args[]){
-        solution("100-200*300-500+20")
+        solution("100-200*300-500+20");
     }
 }
