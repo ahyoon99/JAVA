@@ -38,7 +38,8 @@ public class swea1226 {
     static void solution(BufferedReader br, StringTokenizer st) throws IOException{
         input(br, st);
 
-        BFS();
+        //BFS();
+        DFS();
 
         if(distance[endPoint.x][endPoint.y]==-1 || distance[endPoint.x][endPoint.y] == 0){
             System.out.println(0);
@@ -99,5 +100,38 @@ public class swea1226 {
             }
         }
     }
+	
+    static void DFS(){
+        Stack<Node> st = new Stack<>();
+        boolean[][] visited = new boolean[16][16];
 
+        st.add(startPoint);
+        visited[startPoint.x][startPoint.y]=true;
+        boolean flag;
+
+        distance[startPoint.x][startPoint.y]=1;
+
+        while(!st.isEmpty()){
+            Node node = st.peek();
+            int x = node.x;
+            int y = node.y;
+            flag=false;
+            for(int i=0;i<4;i++){
+                int nx = x+dx[i];
+                int ny = y+dy[i];
+                if(0<=nx && nx<16 && 0<= ny && ny<16){
+                    if(visited[nx][ny]==false && ground[nx][ny]==0){
+                        st.add(new Node(nx, ny));
+                        visited[nx][ny]=true;
+                        distance[nx][ny]=distance[x][y]+1;
+                        flag=true;
+                        break;
+                    }
+                }
+            }
+            if(!flag){
+                st.pop();
+            }
+        }
+    }
 }
