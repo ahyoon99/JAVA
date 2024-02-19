@@ -8,6 +8,7 @@ public class swea1226 {
     static int[][] distance;
     static Node startPoint;
     static Node endPoint;
+    static boolean[][] visited;
 
     static int[] dx = {-1,0,1,0};
     static int[] dy = {0,1,0,-1};
@@ -38,8 +39,16 @@ public class swea1226 {
     static void solution(BufferedReader br, StringTokenizer st) throws IOException{
         input(br, st);
 
+        // 방법 1 - BFS
         //BFS();
-        DFS();
+
+        // 방법 2 - DFS (Stack)
+        //DFSByStack();
+
+        // 방법 3 - DFS (Recursion)
+        distance[startPoint.x][startPoint.y]=1;
+        DFS(startPoint.x, startPoint.y);
+
 
         if(distance[endPoint.x][endPoint.y]==-1 || distance[endPoint.x][endPoint.y] == 0){
             System.out.println(0);
@@ -53,6 +62,7 @@ public class swea1226 {
     static void input(BufferedReader br, StringTokenizer st) throws IOException{
         ground = new int[16][16];
         distance = new int[16][16];
+        visited = new boolean[16][16];
         for(int i=0;i<16;i++){
             st = new StringTokenizer(br.readLine(), " ");
             String oneLine = st.nextToken();
@@ -101,7 +111,7 @@ public class swea1226 {
         }
     }
 	
-    static void DFS(){
+    static void DFSByStack(){
         Stack<Node> st = new Stack<>();
         boolean[][] visited = new boolean[16][16];
 
@@ -131,6 +141,25 @@ public class swea1226 {
             }
             if(!flag){
                 st.pop();
+            }
+        }
+    }
+
+    static void DFS(int x, int y){
+        if(visited[x][y]==true){
+            return;
+        }
+
+        visited[x][y]=true;
+
+        for(int i=0;i<4;i++){
+            int nx = x+dx[i];
+            int ny = y+dy[i];
+            if(0<=nx && nx<16 && 0<= ny && ny<16){
+                if(visited[nx][ny]==false && ground[nx][ny]==0){
+                    distance[nx][ny]=distance[x][y]+1;
+                    DFS(nx, ny);
+                }
             }
         }
     }
