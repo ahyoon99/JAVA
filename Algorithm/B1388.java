@@ -34,7 +34,8 @@ public class B1388 {
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
                 if(visited[i][j]==false){
-                    DFS(i,j);
+                    //DFS(i,j);
+                    DFSByStack(i,j);
                     answer++;
                 }
             }
@@ -93,6 +94,51 @@ public class B1388 {
                         DFS(nx, ny);
                     }
                 }
+            }
+        }
+    }
+
+    static void DFSByStack(int x, int y){
+        Stack<Node> st = new Stack<>();
+
+        st.add(new Node(x,y));
+        visited[x][y]=true;
+        boolean flag ;
+        while(!st.isEmpty()){
+            Node node = st.peek();
+            x = node.x;
+            y = node.y;
+            flag=false;
+            if(floor[x][y]==1){
+                for(int i=0;i<2;i++){
+                    int nx = x+dx[i];
+                    int ny = y+dy[i];
+                    if(0<=nx && nx<n && 0<=ny && ny<m){
+                        if(floor[nx][ny]==1 && visited[nx][ny]==false){
+                            st.add(new Node(nx, ny));
+                            visited[nx][ny]=true;
+                            flag=true;
+                            break;
+                        }
+                    }
+                }
+            }
+            else{
+                for(int i=2;i<4;i++){
+                    int nx = x+dx[i];
+                    int ny = y+dy[i];
+                    if(0<=nx && nx<n && 0<=ny && ny<m){
+                        if(floor[nx][ny]==2 && visited[nx][ny]==false){
+                            st.add(new Node(nx, ny));
+                            visited[nx][ny]=true;
+                            flag=true;
+                            break;
+                        }
+                    }
+                }
+            }
+            if(!flag){
+                st.pop();
             }
         }
     }
