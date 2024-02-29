@@ -31,11 +31,14 @@ public class B11725 {
             graph.get(n2).add(n1);
         }
 
-        BFS();
+        //BFS();
+
+        DFS();
 
         for(int i=2;i<=n;i++){
             System.out.println(parent[i]);
         }
+
     }
 
     static void BFS(){
@@ -53,6 +56,33 @@ public class B11725 {
                     visited[next]=true;
                     parent[next]=num;
                 }
+            }
+        }
+    }
+
+    static void DFS(){
+        Stack<Integer> st = new Stack<>();
+
+        st.add(1);
+        visited[1]=true;
+        boolean flag;
+
+        while(!st.isEmpty()){
+            int num = st.peek();
+            ArrayList<Integer> med = graph.get(num);
+            flag=false;
+            for(int i=0;i<med.size();i++){
+                int next = med.get(i);
+                if(visited[next]==false){
+                    st.add(next);
+                    parent[next]=num;
+                    visited[next]=true;
+                    flag=true;
+                    break;
+                }
+            }
+            if(!flag){
+                st.pop();
             }
         }
     }
