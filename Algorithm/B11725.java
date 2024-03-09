@@ -33,7 +33,9 @@ public class B11725 {
 
         //BFS();
 
-        DFS();
+        //DFS();
+
+        DFSByRecursion(1, -1);
 
         for(int i=2;i<=n;i++){
             System.out.println(parent[i]);
@@ -83,6 +85,22 @@ public class B11725 {
             }
             if(!flag){
                 st.pop();
+            }
+        }
+    }
+
+    static void DFSByRecursion(int n, int prev){
+        if(visited[n]){
+            return ;
+        }
+
+        visited[n]=true;
+        parent[n]=prev;
+
+        ArrayList<Integer> med = graph.get(n);
+        for(int i=0;i<med.size();i++){
+            if(visited[med.get(i)]==false){
+                DFSByRecursion(med.get(i), n);
             }
         }
     }
