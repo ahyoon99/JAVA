@@ -16,12 +16,31 @@ public class B1904 {
 
         int[] dp = new int[n+1];
 
-        dp[1]=1;
-        dp[2]=2;
+        // 방법 1. Bottom up
+        // dp[1]=1;
+        // dp[2]=2;
 
-        for(int i=3;i<=n;i++){
-            dp[i]=(dp[i-1]+dp[i-2])%15746;
+        // for(int i=3;i<=n;i++){
+        //     dp[i]=(dp[i-1]+dp[i-2])%15746;
+        // }
+        // System.out.println(dp[n]);
+
+        // 방법 2. Top down
+        int result = go(n, dp);
+        System.out.println(result);
+        
+    }
+
+    static int go(int n, int[] dp){
+        if(n==1){
+            return 1;
         }
-        System.out.println(dp[n]);
+        else if(n==2){
+            return 2;
+        }
+        if(dp[n]==0){
+            dp[n] = (go(n-1, dp)+go(n-2, dp))%15746;
+        }
+        return dp[n];
     }
 }
